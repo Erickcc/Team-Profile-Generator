@@ -7,26 +7,26 @@ const inquirer = require("inquirer");
 const path = require('path');
 
 const managerQuestion = [
-      {
+    {
         type: "input",
         message: "Enter the Team manager's Name",
         name: "name",
-      },
-      {
+    },
+    {
         type: "input",
         message: "Enter the Team manager's employee ID",
         name: "id",
-      },
-      {
+    },
+    {
         type: "input",
         message: "Enter the Team manager's email address",
         name: "email",
-      },
-      {
+    },
+    {
         type: "input",
         message: "Enter the Team manager's office number",
         name: "number",
-      },
+    },
 ];
 
 const addMemberQuestion = [
@@ -84,10 +84,6 @@ const addInternQuestion = [
     },
 ]
 
-// const manager = [];
-// const engineers = [];
-// const interns = [];
-
 const iconClass = {
     manager: `<i class="fas fa-mug-hot"></i>`,
     engineer: `<i class="fa fa-glasses"></i>`,
@@ -99,7 +95,7 @@ let cardCounter = 0;
 
 const addCards = (newCard) => {
     let currentIcon;
-    switch (newCard.getRole()){
+    switch (newCard.getRole()) {
         case 'Manager':
             currentIcon = iconClass.manager;
             break;
@@ -113,110 +109,108 @@ const addCards = (newCard) => {
             currentIcon = 'Something went wrong';
             break;
     }
-    // console.log(newCard.getRole());
-    // console.log(newCard.getName());
     if (cardCounter % 3 === 0) {
-        cardsInfo+=
-`
-<div class="row d-flex align-items-center justify-content-center mt-3">
+        cardsInfo +=
+            `
+    <div class="row d-flex align-items-center justify-content-center mt-3">
 `;
     }
 
-    if (newCard.getRole() === 'Manager'){
-        cardsInfo+=
-`
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">${newCard.getName()}</h5>
-                <p class="card-text">
-                    ${currentIcon}
-                    ${newCard.getRole()}
-                </p>
-            </div>
-            <div class="bg-light">
-                <ul class="list-group list-group-flush bg-light card-list">
-                    <li class="list-group-item">ID: ${newCard.getID()}</li>
-                    <li class="list-group-item">Email: 
-                        <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
-                    </li>
-                    <li class="list-group-item">Office number: ${newCard.getOfficeNumber()}</li>
-                </ul>
+    if (newCard.getRole() === 'Manager') {
+        cardsInfo +=
+            `
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${newCard.getName()}</h5>
+                    <p class="card-text">
+                        ${currentIcon}
+                        ${newCard.getRole()}
+                    </p>
+                </div>
+                <div class="bg-light">
+                    <ul class="list-group list-group-flush bg-light card-list">
+                        <li class="list-group-item">ID: ${newCard.getID()}</li>
+                        <li class="list-group-item">Email: 
+                            <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
+                        </li>
+                        <li class="list-group-item">Office number: ${newCard.getOfficeNumber()}</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
 `;
     }
 
-    if (newCard.getRole() === 'Engineer'){
-        cardsInfo+=
-`
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">${newCard.getName()}</h5>
-                <p class="card-text">
-                    ${currentIcon}
-                    ${newCard.getRole()}
-                </p>
-            </div>
-            <div class="bg-light">
-                <ul class="list-group list-group-flush bg-light card-list">
-                    <li class="list-group-item">ID: ${newCard.getID()}</li>
-                    <li class="list-group-item">Email: 
-                        <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
-                    </li>
-                    <li class="list-group-item">GitHub: 
-                        <a href="https://github.com/${newCard.getGithub()}" target="_blank">${newCard.getGithub()}</a>
-                    </li>
-                </ul>
+    if (newCard.getRole() === 'Engineer') {
+        cardsInfo +=
+            `
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${newCard.getName()}</h5>
+                    <p class="card-text">
+                        ${currentIcon}
+                        ${newCard.getRole()}
+                    </p>
+                </div>
+                <div class="bg-light">
+                    <ul class="list-group list-group-flush bg-light card-list">
+                        <li class="list-group-item">ID: ${newCard.getID()}</li>
+                        <li class="list-group-item">Email: 
+                            <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
+                        </li>
+                        <li class="list-group-item">GitHub: 
+                            <a href="https://github.com/${newCard.getGithub()}" target="_blank">${newCard.getGithub()}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     
     `;
     }
 
-    if (newCard.getRole() === 'Intern'){
-        cardsInfo+=
-`
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">${newCard.getName()}</h5>
-                <p class="card-text">
-                ${currentIcon}
-                ${newCard.getRole()}
-                </p>
-            </div>
-            <div class="bg-light">
-                <ul class="list-group list-group-flush bg-light card-list">
-                <li class="list-group-item">ID: ${newCard.getID()}</li>
-                <li class="list-group-item">Email: 
-                    <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
-                </li>
-                    <li class="list-group-item">School: ${newCard.getSchool()}</li>
-                </ul>
+    if (newCard.getRole() === 'Intern') {
+        cardsInfo +=
+            `
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">${newCard.getName()}</h5>
+                    <p class="card-text">
+                    ${currentIcon}
+                    ${newCard.getRole()}
+                    </p>
+                </div>
+                <div class="bg-light">
+                    <ul class="list-group list-group-flush bg-light card-list">
+                    <li class="list-group-item">ID: ${newCard.getID()}</li>
+                    <li class="list-group-item">Email: 
+                        <a href="mailto:${newCard.getEmail()}">${newCard.getEmail()}</a>
+                    </li>
+                        <li class="list-group-item">School: ${newCard.getSchool()}</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     
     `;
     }
 
     if (cardCounter % 3 === 2) {
-        cardsInfo+=
-`
-</div>
+        cardsInfo +=
+            `
+    </div>
 `;
     }
-    
+
     cardCounter++;
 }
 
 function writeToFile(data) {
-    fs.writeFile(path.join(__dirname, './dist/index.html'), data, (err)=>{
+    fs.writeFile(path.join(__dirname, './dist/index.html'), data, (err) => {
         if (err) throw err;
         console.log("index.html File created succesfully");
     });
@@ -224,12 +218,12 @@ function writeToFile(data) {
 
 
 const buildFile = () => {
-    if (cardCounter % 3 != 0 ){
+    if (cardCounter % 3 != 0) {
         cardsInfo += `</div>`
     }
 
     const htmlBody =
-`
+        `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -272,17 +266,15 @@ const buildFile = () => {
     writeToFile(htmlBody);
 }
 
-const addEngineer = (myCallback) =>{
+const addEngineer = (myCallback) => {
     inquirer.prompt(addEngineerQuestion).then((engineerResponse) => {
-        // engineers.push(new Engineer(engineerResponse.name, engineerResponse.id, engineerResponse.email, engineerResponse.github));
         addCards(new Engineer(engineerResponse.name, engineerResponse.id, engineerResponse.email, engineerResponse.github));
         myCallback();
     });
 }
 
-const addIntern = (myCallback) =>{
+const addIntern = (myCallback) => {
     inquirer.prompt(addInternQuestion).then((internResponse) => {
-        // interns.push(new Intern(internResponse.name, internResponse.id, internResponse.email, internResponse.school));
         addCards(new Intern(internResponse.name, internResponse.id, internResponse.email, internResponse.school));
         myCallback();
     });
@@ -290,14 +282,14 @@ const addIntern = (myCallback) =>{
 
 const addTeamMember = () => {
     inquirer.prompt(addMemberQuestion).then((memberResponse) => {
-        if (memberResponse.memberType != 'Finish'){
-            if (memberResponse.memberType === 'Engineer'){
+        if (memberResponse.memberType != 'Finish') {
+            if (memberResponse.memberType === 'Engineer') {
                 addEngineer(addTeamMember);
-            }else{
+            } else {
                 addIntern(addTeamMember);
             }
-        } 
-        else{
+        }
+        else {
             buildFile();
         }
     });
@@ -305,8 +297,7 @@ const addTeamMember = () => {
 
 const addManager = (myCallback) => {
     inquirer.prompt(managerQuestion).then((managerResponse) => {
-        // manager.push(new Manager(managerResponse.name, managerResponse.id, managerResponse.number));
-        addCards(new Manager(managerResponse.name, managerResponse.id, managerResponse.email ,managerResponse.number));
+        addCards(new Manager(managerResponse.name, managerResponse.id, managerResponse.email, managerResponse.number));
         myCallback();
     });
 }
