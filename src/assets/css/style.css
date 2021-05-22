@@ -1,0 +1,25 @@
+body{
+    width: 100%;
+    margin: 0%;
+}
+
+.header-container{
+    height: 200px;
+    color: white;
+    background-color: crimson;
+    margin: 0;
+    padding: 0;
+}
+
+.header-text{
+    text-align: center;
+}
+
+.card-body{
+    background-color: DodgerBlue;
+    color: white;
+}
+
+.card-list{
+    margin: 30px 15px;
+}
